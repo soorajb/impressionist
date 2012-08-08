@@ -4,6 +4,7 @@ require File.expand_path('../lib/impressionist/version', __FILE__)
 Gem::Specification.new do |s|
   s.add_dependency 'httpclient', '~> 2.2'
   s.add_dependency 'nokogiri', '~> 1.5'
+  s.add_dependency 'geoip-rails'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'rake', '>= 0.9'
   s.add_development_dependency 'rails', '~>3.1'
