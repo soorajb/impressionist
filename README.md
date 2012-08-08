@@ -51,6 +51,7 @@ The following fields are provided in the migration:
     t.string   "controller_name"      # logs the controller name
     t.string   "action_name"          # logs the action_name
     t.string   "view_name"            # TODO: log individual views (as well as partials and nested partials)
+    t.string   "first_time_visitor"          # logs if visitor is first time, creates tracking cookie
     t.string   "request_hash"         # unique ID per request, in case you want to log multiple impressions and group them
     t.string   "session_hash"         # logs the rails session
     t.string   "ip_address"           # request.remote_ip

@@ -16,13 +16,22 @@ module ImpressionistController
       unless bypass
         if obj.respond_to?("impressionable?")
           if unique_instance?(obj, opts[:unique])
-            obj.impressions.create(associative_create_statement({:message => message}))
+            create_first_time_visit_cookie if first_time_visitor
+            obj.impressions.create(associative_create_statement({:message => message,:first_time_visitor=>first_time_visitor}))
           end
         else
           # we could create an impression anyway. for classes, too. why not?
           raise "#{obj.class.to_s} is not impressionable!"
         end
       end
+    end
+
+    def create_first_time_visit_cookie
+     puts cookies.permanent[:_visited] = request.env["REQUEST_URI"]
+    end
+
+    def first_time_visitor
+      request.cookies.select{|k,v| k=="_visited"}.blank?
     end
 
     def impressionist_app_filter
