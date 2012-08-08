@@ -1,4 +1,5 @@
 require "impressionist/engine.rb"
+require "geoip-rails"
 
 module Impressionist
   # Define ORM

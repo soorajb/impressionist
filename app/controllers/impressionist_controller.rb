@@ -17,7 +17,7 @@ module ImpressionistController
         if obj.respond_to?("impressionable?")
           if unique_instance?(obj, opts[:unique])
             create_first_time_visit_cookie if first_time_visitor
-            obj.impressions.create(associative_create_statement({:message => message,:first_time_visitor=>first_time_visitor}))
+            obj.impressions.create(associative_create_statement(geo_ip_info.merge({:message => message,:first_time_visitor=>first_time_visitor})))
           end
         else
           # we could create an impression anyway. for classes, too. why not?
@@ -32,6 +32,11 @@ module ImpressionistController
 
     def first_time_visitor
       request.cookies.select{|k,v| k=="_visited"}.blank?
+    end
+
+    def geo_ip_info
+      info = Geoip::Location.find_by_ip(request.remote_ip)
+      info ? {:city=>info.city,:country=>info.country} : {}
     end
 
     def impressionist_app_filter

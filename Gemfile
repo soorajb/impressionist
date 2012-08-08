@@ -8,6 +8,7 @@ end
 
 platforms :ruby, :mswin, :mingw do
   gem 'sqlite3'
+  gem "geoip-rails"
 end
 
 gemspec

@@ -1,7 +1,7 @@
 class Impression < ActiveRecord::Base
   attr_accessible :impressionable_type, :impressionable_id, :user_id,
   :controller_name, :action_name, :view_name, :request_hash, :ip_address,
-  :session_hash, :message, :referrer,:first_time_visitor
+  :session_hash, :message, :referrer,:first_time_visitor,:city,:country
 
   after_save :update_impressions_counter_cache
 
